@@ -17,7 +17,9 @@
 		32475C6616A1923E004543D6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32475C6516A1923E004543D6 /* Default@2x.png */; };
 		32475C6816A1923E004543D6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32475C6716A1923E004543D6 /* Default-568h@2x.png */; };
 		32475C6B16A1923E004543D6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32475C6916A1923E004543D6 /* MainStoryboard.storyboard */; };
-		32475C6E16A1923E004543D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32475C6D16A1923E004543D6 /* ViewController.m */; };
+		32475C7616A193CD004543D6 /* ServiceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32475C7516A193CD004543D6 /* ServiceTableViewController.m */; };
+		32475C7916A19A94004543D6 /* PreviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32475C7816A19A94004543D6 /* PreviewTableViewController.m */; };
+		32AF24D716A8ABC500D5E082 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AF24D616A8ABC500D5E082 /* Service.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +37,12 @@
 		32475C6516A1923E004543D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		32475C6716A1923E004543D6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		32475C6A16A1923E004543D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		32475C6C16A1923E004543D6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		32475C6D16A1923E004543D6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		32475C7416A193CD004543D6 /* ServiceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTableViewController.h; sourceTree = "<group>"; };
+		32475C7516A193CD004543D6 /* ServiceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTableViewController.m; sourceTree = "<group>"; };
+		32475C7716A19A94004543D6 /* PreviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewTableViewController.h; sourceTree = "<group>"; };
+		32475C7816A19A94004543D6 /* PreviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewTableViewController.m; sourceTree = "<group>"; };
+		32AF24D516A8ABC500D5E082 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Service.h; sourceTree = "<group>"; };
+		32AF24D616A8ABC500D5E082 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Service.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +92,13 @@
 				32475C6016A1923E004543D6 /* AppDelegate.h */,
 				32475C6116A1923E004543D6 /* AppDelegate.m */,
 				32475C6916A1923E004543D6 /* MainStoryboard.storyboard */,
-				32475C6C16A1923E004543D6 /* ViewController.h */,
-				32475C6D16A1923E004543D6 /* ViewController.m */,
 				32475C5816A1923E004543D6 /* Supporting Files */,
+				32475C7416A193CD004543D6 /* ServiceTableViewController.h */,
+				32475C7516A193CD004543D6 /* ServiceTableViewController.m */,
+				32475C7716A19A94004543D6 /* PreviewTableViewController.h */,
+				32475C7816A19A94004543D6 /* PreviewTableViewController.m */,
+				32AF24D516A8ABC500D5E082 /* Service.h */,
+				32AF24D616A8ABC500D5E082 /* Service.m */,
 			);
 			path = umami_news;
 			sourceTree = "<group>";
@@ -175,7 +185,9 @@
 			files = (
 				32475C5E16A1923E004543D6 /* main.m in Sources */,
 				32475C6216A1923E004543D6 /* AppDelegate.m in Sources */,
-				32475C6E16A1923E004543D6 /* ViewController.m in Sources */,
+				32475C7616A193CD004543D6 /* ServiceTableViewController.m in Sources */,
+				32475C7916A19A94004543D6 /* PreviewTableViewController.m in Sources */,
+				32AF24D716A8ABC500D5E082 /* Service.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +304,7 @@
 				32475C7316A1923E004543D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

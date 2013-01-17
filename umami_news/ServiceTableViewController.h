@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ServiceTableViewController.h
 //  umami_news
 //
 //  Created by Emanuel Campos on 12.01.13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ServiceTableViewController : UITableViewController
 
 @end
