@@ -7,21 +7,29 @@
 //
 
 #import "Service.h"
+#import "ServiceTableViewController.h"
 
 @implementation Service
 
-@synthesize serviceName,serviceTitle;
+@synthesize serviceName;
 
--(id)initServiceName:(NSString *)aserviceName serviceTitle:(NSString *)aServiceTitle; //resultDictionary:(NSDictionary *)aResultDictionary
+-(id)initServiceName:(NSString *)aserviceName  resultDictionary:(NSDictionary *)aResultDictionary;
 {
     self=[super init];
     if (self) {
         self.serviceName = aserviceName;
-        self.serviceTitle = aServiceTitle;
-   //     self.resultDictionary = aResultDictionary;
+
+        self.resultDictionary = aResultDictionary;
     }
     return self;
     
 }
+-(NSDictionary *)fetchResultDictionary{
+    
+    NSDictionary *pf = [[NSDictionary alloc] initWithObjectsAndKeys:@"hello", nil];
+    
+    return pf;
+}
+
 
 @end

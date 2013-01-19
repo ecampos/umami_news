@@ -16,19 +16,11 @@
 
 @implementation PreviewTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+        self.tableView.rowHeight = 60.0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,13 +33,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return 1;
 }
 
@@ -55,14 +45,27 @@
 {
     static NSString *CellIdentifier = @"previewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = self.service.serviceTitle;
-    
+    cell.backgroundColor =[UIColor colorWithRed:236/255.0f green:236/255.0f blue:231/255.0f alpha:1.0];
+    cell.textLabel.textColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
+    cell.detailTextLabel.textColor = [UIColor colorWithRed:54/255.0f green:103/255.0f blue:116/255.0f alpha:1.0];
 
-    // Configure the cell...
-  
+    
+    if (self.service.resultDictionary != nil) {
+    cell.textLabel.text = self.service.serviceName;
+    cell.detailTextLabel.text = self.service.serviceName;
+
+    } else {
+        NSLog(@"%@", self.service);
+        cell.textLabel.text = @"Nothing to see here";
+        cell.detailTextLabel.text = @"please go back and search again";
+    }
     return cell;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+}
 
 #pragma mark - Table view delegate
 
