@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ServiceTableViewController : UITableViewController <UISearchBarDelegate>
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @end

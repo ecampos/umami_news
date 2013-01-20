@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03EB0F2016AC558E009C6A06 /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EB0F1F16AC558E009C6A06 /* MD5.m */; };
 		32475C5216A1923E004543D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32475C5116A1923E004543D6 /* UIKit.framework */; };
 		32475C5416A1923E004543D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32475C5316A1923E004543D6 /* Foundation.framework */; };
 		32475C5616A1923E004543D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32475C5516A1923E004543D6 /* CoreGraphics.framework */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03EB0F1E16AC558E009C6A06 /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
+		03EB0F1F16AC558E009C6A06 /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
 		32475C4D16A1923E004543D6 /* umami_news.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = umami_news.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32475C5116A1923E004543D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		32475C5316A1923E004543D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +107,8 @@
 				32AF24D616A8ABC500D5E082 /* Service.m */,
 				325816FA16AAD77E009C22CF /* DetailViewController.h */,
 				325816FB16AAD77E009C22CF /* DetailViewController.m */,
+				03EB0F1E16AC558E009C6A06 /* MD5.h */,
+				03EB0F1F16AC558E009C6A06 /* MD5.m */,
 			);
 			path = umami_news;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				32475C7916A19A94004543D6 /* PreviewTableViewController.m in Sources */,
 				32AF24D716A8ABC500D5E082 /* Service.m in Sources */,
 				325816FC16AAD77E009C22CF /* DetailViewController.m in Sources */,
+				03EB0F2016AC558E009C6A06 /* MD5.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

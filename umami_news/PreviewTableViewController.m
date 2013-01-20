@@ -40,23 +40,19 @@
 {
     if (self.service.serviceName == @"twitter"){
         if (twitterResponse != nil){
-            NSLog(@"%@",twitterResponse);
-                return twitterResponse.count;
+                return twitterNames.count;
         } else {
             return 1;
         }
     } else if (self.service.serviceName == @"facebook"){
         if (facebookResponse != nil){
-                       NSLog(@"%@",facebookResponse);
-            return facebookResponse.count;
+            return facebookNames.count;
         } else {
             return 1;
         }
     } else if (self.service.serviceName == @"news"){
         if (daylifeResponse != nil){
-                       NSLog(@"%@",daylifeResponse);
-            //limit specifically set to 10
-            return 10;
+            return daylifeNames.count;
         } else {
             return 1;
         }
@@ -76,43 +72,53 @@
     //case if Twitter
     if (self.service.serviceName == @"twitter") {
         if (twitterResponse!= nil){
-            cell.textLabel.text = [[[twitterResponse objectForKey:@"results"] valueForKey:@"from_user_name"] objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = [[[twitterResponse objectForKey:@"results"] valueForKey:@"text"] objectAtIndex:indexPath.row];
+            cell.textLabel.text = [[twitterNames valueForKey:@"from_user_name"] objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [[twitterContent valueForKey:@"text"] objectAtIndex:indexPath.row];
         }else {
             cell.textLabel.text = @"Nothing to see here";
             cell.detailTextLabel.text = @"please go back and search again";
         }
         
+        //case if Daylife
+    } else if (self.service.serviceName == @"news") {
+        if (daylifeResponse!= nil){
+            cell.textLabel.text = [[daylifeNames valueForKey:@"name"] objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [[daylifeContent valueForKey:@"headline"] objectAtIndex:indexPath.row];
+        }else {
+            cell.textLabel.text = @"Nothing to see here";
+            cell.detailTextLabel.text = @"please go back and search again";
+              }
     //case if Facebook
     } else if (self.service.serviceName == @"facebook") {
         if (facebookResponse!= nil){
-            cell.textLabel.text = [[[[facebookResponse objectForKey:@"data"] valueForKey:@"from"] valueForKey:@"name"] objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = [[[facebookResponse objectForKey:@"data"] valueForKey:@"message"] objectAtIndex:indexPath.row];
+            cell.textLabel.text = [[facebookNames  valueForKey:@"name"] objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [[facebookContent valueForKey:@"message"] objectAtIndex:indexPath.row];
         }else {
             cell.textLabel.text = @"Nothing to see here";
             cell.detailTextLabel.text = @"please go back and search again";
         }
-        
-    //case if Daylife
-    } else if (self.service.serviceName == @"news") {
-        if (daylifeResponse!= nil){
-            cell.textLabel.text = [[[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"source"] valueForKey:@"name"] objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = [[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"headline"] objectAtIndex:indexPath.row];
-        }else {
-            cell.textLabel.text = @"Nothing to see here";
-            cell.detailTextLabel.text = @"please go back and search again";
-        }
+     
     //case invalid service Name
     } else {
-        cell.textLabel.text = @"Nothing to see here";
-        cell.detailTextLabel.text = @"please go back and search again";
+        cell.textLabel.text = @"How did you even get here";
+        cell.detailTextLabel.text = @"please go back and try not to break anything";
     }
     return cell;
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+/*    if ([segue.identifier isEqualToString:@"goTodetailView"]) {
+        UITableViewCell *cell =(UITableViewCell *)sender;
+        NSIndexPath *ip =  [self.tableView indexPathForCell:cell];
+        Service *s = [services objectAtIndex:ip.row];
+        
+        PreviewTableViewController *dest = (PreviewTableViewController *)segue.destinationViewController;
+        dest.title = s.serviceName;
+        dest.service= s;
+        
+        
+    }
+ */
 }
 
 #pragma mark - Table view delegate

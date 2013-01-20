@@ -11,15 +11,16 @@
 
 @implementation Service
 
-@synthesize serviceName;
+@synthesize serviceName, resultDictionary, nameDictionary, contentDictionary;
 
--(id)initServiceName:(NSString *)aserviceName  resultDictionary:(NSDictionary *)aResultDictionary;
+-(id)initServiceName:(NSString *)aServiceName  resultDictionary:(NSDictionary *)aResultDictionary nameDictionary:(NSDictionary *)aNameDictionary contentDictionary:(NSDictionary *)aContentDictionary;
 {
     self=[super init];
     if (self) {
-        self.serviceName = aserviceName;
-
+        self.serviceName = aServiceName;
         self.resultDictionary = aResultDictionary;
+        self.nameDictionary = aNameDictionary;
+        self.contentDictionary = aContentDictionary;
     }
     return self;
     

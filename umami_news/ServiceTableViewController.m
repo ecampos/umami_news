@@ -9,6 +9,7 @@
 #import "ServiceTableViewController.h"
 #import "PreviewTableViewController.h"
 #import "Service.h"
+#import "MD5.h"
 
 
 @interface ServiceTableViewController ()
@@ -26,9 +27,11 @@
 
     
     //create service objects that contain Data
-    Service *facebookService = [[Service alloc] initServiceName:@"facebook"  resultDictionary:facebookResponse];
-    Service *twitterService = [[Service alloc] initServiceName:@"twitter" resultDictionary:twitterResponse];
-    Service *newsService = [[Service alloc] initServiceName:@"news"  resultDictionary:daylifeResponse];
+    Service *twitterService = [[Service alloc] initServiceName:@"twitter" resultDictionary:twitterResponse nameDictionary:twitterNames contentDictionary:twitterContent];
+    Service *newsService = [[Service alloc] initServiceName:@"news"  resultDictionary:daylifeResponse nameDictionary:daylifeNames contentDictionary:daylifeContent];    
+    Service *facebookService = [[Service alloc] initServiceName:@"facebook"  resultDictionary:facebookResponse nameDictionary:facebookNames contentDictionary:facebookContent];
+
+
     
     self.services = [NSArray arrayWithObjects:facebookService, twitterService, newsService, nil];
 
@@ -49,23 +52,34 @@
         NSString *facebook = @"https://graph.facebook.com/search?q=";
         
         NSString *facebookObjectType = @"&type=post"; //Facebook Specific
-        NSString *limit =@"10"; //Daylife Specific
+        //Daylife Specific
+        
         NSString *accessKey = @"4d68ec63b744eec43fffad2fa9af98d1"; //Daylife Specific
-        NSString *signature = @"02919f7064f10403310460de2737b7ab"; //Daylife Specific
+        NSString *signatureCombiner = [NSString stringWithFormat:@"%@%@%@", accessKey, @"fd6167e10d2a54abe0206789adbaac09", query];
+        NSString *capSignature = [signatureCombiner MD5String];
+        NSString *signature = [capSignature lowercaseString];
         
         
         // request perparation
         
-        NSString *daylifeURLString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@", daylife,@"query=", query, @"&limit=",limit, @"&accesskey=", accessKey, @"&signature=", signature];
-        NSURL *daylifeURL =[NSURL URLWithString:daylifeURLString];
+        NSString *daylifeURLString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", daylife,@"query=", query, @"&accesskey=", accessKey, @"&signature=", signature];
+  //      NSstring *new = [daylifeURLString stringby]
+        NSString *escapedDaylife = [daylifeURLString stringByAddingPercentEscapesUsingEncoding:
+        NSUTF8StringEncoding];
+        NSURL *daylifeURL =[NSURL URLWithString:escapedDaylife];
         NSData *daylifeData = [NSData dataWithContentsOfURL:daylifeURL];
+
         
         NSString *twitterURLString = [NSString stringWithFormat:@"%@%@", twitter, query];
-        NSURL *twitterURL = [NSURL URLWithString:twitterURLString];
+        NSString *escapedTwitter = [twitterURLString stringByAddingPercentEscapesUsingEncoding:
+                                    NSUTF8StringEncoding];
+        NSURL *twitterURL = [NSURL URLWithString:escapedTwitter];
         NSData *twitterData = [NSData dataWithContentsOfURL:twitterURL];
         
         NSString *facebookURLString = [NSString stringWithFormat:@"%@%@%@", facebook, query, facebookObjectType];
-        NSURL *facebookURL = [NSURL URLWithString:facebookURLString];
+        NSString *escapedFacebook = [facebookURLString stringByAddingPercentEscapesUsingEncoding:
+                                     NSUTF8StringEncoding];
+        NSURL *facebookURL = [NSURL URLWithString:escapedFacebook];
         NSData *facebookData = [NSData dataWithContentsOfURL:facebookURL];
         
         NSError *error;
@@ -78,10 +92,15 @@
                                                             error:&error];
         facebookResponse = [NSJSONSerialization JSONObjectWithData:facebookData
                                                            options:kNilOptions error:&error];
-        [super viewDidLoad];
-     //   [services objectAtIndex:@"facebook"
-     //   NSLog(@"%@", facebookResponse);
         
+        twitterNames = [twitterResponse objectForKey:@"results"];
+        twitterContent = [twitterResponse objectForKey:@"results"];
+        daylifeNames = [[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"source"];
+        daylifeContent = [[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"];
+        facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
+        facebookContent = [facebookResponse objectForKey:@"data"];
+        [super viewDidLoad];
+
     });
     [searchBar resignFirstResponder];
 }
@@ -127,13 +146,10 @@
         Service *s = [self.services objectAtIndex:ip.row];
         
         PreviewTableViewController *dest = (PreviewTableViewController *)segue.destinationViewController;
+        dest.title = s.serviceName;
         dest.service= s;
-        if(cell.textLabel.text ==@"twitter"){
-            dest.service.twitterResponse = [[NSDictionary alloc] initWithObjectsAndKeys:@"hello", nil];// twitterResponse;
-            
-        } else if (cell.textLabel.text ==@"news"){
-            dest.service.daylifeResponse = daylifeResponse;
-        }
+        
+
 }
 }
   
