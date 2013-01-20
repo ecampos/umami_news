@@ -12,15 +12,16 @@ NSDictionary *daylifeResponse;
 NSDictionary *facebookResponse;
 @interface Service : NSObject
 
-@property (strong)NSString *serviceName;
 @property (strong)NSDictionary *resultDictionary;
+@property (strong)NSString *serviceName;
 @property (strong)NSString *query;
 @property (strong)NSDictionary *twitterResponse;
 @property (strong)NSDictionary *daylifeResponse;
 @property (strong)NSDictionary *facebookResponse;
 
 -(id)initServiceName:(NSString *)aServiceName  resultDictionary:(NSDictionary *)aResultDictionary;
--(NSDictionary *) fetchResultDictionary;
+-(void)setResultDictionary:(NSDictionary *)resultDictionary;
+
 
 
 @end

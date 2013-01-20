@@ -24,12 +24,7 @@
     return self;
     
 }
--(NSDictionary *)fetchResultDictionary{
-    
-    NSDictionary *pf = [[NSDictionary alloc] initWithObjectsAndKeys:@"hello", nil];
-    
-    return pf;
-}
+
 
 
 @end

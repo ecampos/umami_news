@@ -78,8 +78,9 @@
                                                             error:&error];
         facebookResponse = [NSJSONSerialization JSONObjectWithData:facebookData
                                                            options:kNilOptions error:&error];
+        [super viewDidLoad];
      //   [services objectAtIndex:@"facebook"
-        NSLog(@"%@", facebookResponse);
+     //   NSLog(@"%@", facebookResponse);
         
     });
     [searchBar resignFirstResponder];
@@ -128,10 +129,10 @@
         PreviewTableViewController *dest = (PreviewTableViewController *)segue.destinationViewController;
         dest.service= s;
         if(cell.textLabel.text ==@"twitter"){
-            dest.service.resultDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:@"hello", nil];// twitterResponse;
+            dest.service.twitterResponse = [[NSDictionary alloc] initWithObjectsAndKeys:@"hello", nil];// twitterResponse;
             
         } else if (cell.textLabel.text ==@"news"){
-            dest.service.resultDictionary = daylifeResponse;
+            dest.service.daylifeResponse = daylifeResponse;
         }
 }
 }
