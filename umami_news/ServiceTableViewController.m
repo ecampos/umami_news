@@ -23,18 +23,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //add Search Bar to Navigation View
     self.searchBar.delegate =self;
     self.navigationItem.titleView = self.searchBar;
-
-
     
     //create service objects that contain Data
     Service *twitterService = [[Service alloc] initServiceName:@"twitter" resultDictionary:twitterResponse nameDictionary:twitterNames contentDictionary:twitterContent];
     Service *newsService = [[Service alloc] initServiceName:@"news"  resultDictionary:daylifeResponse nameDictionary:daylifeNames contentDictionary:daylifeContent];    
     Service *facebookService = [[Service alloc] initServiceName:@"facebook"  resultDictionary:facebookResponse nameDictionary:facebookNames contentDictionary:facebookContent];
-
-
-    
+   
+    //create an Array containing the just created objects
     self.services = [NSArray arrayWithObjects:facebookService, twitterService, newsService, nil];
 
 }
@@ -70,7 +68,7 @@
         NSData *daylifeData = [NSData dataWithContentsOfURL:daylifeURL];
 
         
-        NSString *twitterURLString = [NSString stringWithFormat:@"%@%@", twitter, query];
+        NSString *twitterURLString = [NSString stringWithFormat:@"%@%@%@", twitter, query, @"&lang=en"];
         NSString *escapedTwitter = [twitterURLString stringByAddingPercentEscapesUsingEncoding:
                                     NSUTF8StringEncoding];
         NSURL *twitterURL = [NSURL URLWithString:escapedTwitter];
@@ -101,7 +99,7 @@
         facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
         facebookContent = [facebookResponse objectForKey:@"data"];
         
- //       NSLog(@"%@", facebookContent);
+        NSLog(@"%@", facebookResponse);
  //       NSLog(@"%@", facebookNames);
         
         if (facebookContent != nil) {
@@ -130,16 +128,20 @@
     //number of rows
     return services.count;
 }
+//[[self theTableViewToChangeItsHeader]reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //
+
+    [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
    
     Service *s = [services objectAtIndex:indexPath.row];
     cell.textLabel.text = s.serviceName;
-    cell.backgroundColor =[UIColor colorWithRed:236/255.0f green:236/255.0f blue:231/255.0f alpha:1.0];
+    cell.backgroundColor = [UIColor colorWithRed:236/255.0f green:236/255.0f blue:231/255.0f alpha:1.0];
     cell.textLabel.textColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
     return cell;
 

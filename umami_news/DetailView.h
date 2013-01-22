@@ -11,11 +11,11 @@
 
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
-@property (strong)Service *detailService;
 @property (weak, nonatomic) IBOutlet UIImageView *heroImage;
 @property (strong, nonatomic) IBOutlet UIView *dtailView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (strong)NSString *message;
+@property (strong)UIImage *imageCarrier;
 
 @property (strong, nonatomic) id detailItem;
 @end

@@ -144,10 +144,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xOQ-3G-TBa" userLabel="heroImage">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="xOQ-3G-TBa" userLabel="heroImage">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="99" id="dXs-ni-KMx"/>
-                                    <constraint firstAttribute="width" constant="100" id="u4O-rH-SMx"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" type="user" id="12G-Jr-6uQ"/>
+                                    <constraint firstAttribute="width" priority="1" constant="100" type="user" id="3Ig-LF-ter"/>
+                                    <constraint firstAttribute="height" constant="99" id="EjD-UL-gUn"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" type="user" id="TAp-aI-WnO"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3K-Rt-IT3">
@@ -162,11 +164,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xOQ-3G-TBa" firstAttribute="centerX" secondItem="9sN-Tp-CLn" secondAttribute="centerX" type="default" id="0dI-Qp-NSI"/>
                             <constraint firstItem="d3K-Rt-IT3" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3ii-HA-9WP"/>
-                            <constraint firstAttribute="trailing" secondItem="d3K-Rt-IT3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="HLL-Sa-CzS"/>
-                            <constraint firstAttribute="bottom" secondItem="d3K-Rt-IT3" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="VYW-A2-MrZ"/>
-                            <constraint firstItem="xOQ-3G-TBa" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="hJC-0d-Q0n"/>
-                            <constraint firstItem="d3K-Rt-IT3" firstAttribute="top" secondItem="xOQ-3G-TBa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="jfM-A4-dY4"/>
+                            <constraint firstItem="xOQ-3G-TBa" firstAttribute="centerX" secondItem="d3K-Rt-IT3" secondAttribute="centerX" type="default" id="D0l-zl-duo"/>
+                            <constraint firstItem="d3K-Rt-IT3" firstAttribute="top" secondItem="xOQ-3G-TBa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NxL-61-dNC"/>
+                            <constraint firstItem="xOQ-3G-TBa" firstAttribute="top" secondItem="9sN-Tp-CLn" secondAttribute="top" constant="20" symbolic="YES" type="default" id="S7d-jf-FPK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NcZ-cZ-5lO"/>
@@ -186,9 +188,9 @@
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="contentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="dtailView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="heroImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="randomLabel" candidateClass="UITextView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
