@@ -18,12 +18,14 @@
 @end
 
 @implementation ServiceTableViewController
-@synthesize services;
+@synthesize services, activityIndicator;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.searchBar.delegate =self;
+    self.navigationItem.titleView = self.searchBar;
+
 
     
     //create service objects that contain Data
@@ -39,13 +41,11 @@
 
 -(void) searchBarSearchButtonClicked:(UISearchBar*) searchBar
 {
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //input parameters
         NSString *query = searchBar.text;
-        
-        
-
         
         NSString *twitter = @"http://search.twitter.com/search.json?q=";
         NSString *daylife  = @"http://freeapi.daylife.com/jsonrest/publicapi/4.10/search_getRelatedArticles?";
@@ -93,13 +93,20 @@
         facebookResponse = [NSJSONSerialization JSONObjectWithData:facebookData
                                                            options:kNilOptions error:&error];
         
+        
         twitterNames = [twitterResponse objectForKey:@"results"];
         twitterContent = [twitterResponse objectForKey:@"results"];
         daylifeNames = [[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"source"];
         daylifeContent = [[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"];
         facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
         facebookContent = [facebookResponse objectForKey:@"data"];
-        [super viewDidLoad];
+        
+ //       NSLog(@"%@", facebookContent);
+ //       NSLog(@"%@", facebookNames);
+        
+        if (facebookContent != nil) {
+        [self.activityIndicator stopAnimating];
+        }
 
     });
     [searchBar resignFirstResponder];
@@ -142,12 +149,12 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"goToPreview"]) {
         UITableViewCell *cell =(UITableViewCell *)sender;
-        NSIndexPath *ip =  [self.tableView indexPathForCell:cell];
-        Service *s = [self.services objectAtIndex:ip.row];
+        NSIndexPath *indexPath =  [self.tableView indexPathForCell:cell];
+        Service *informationSource = [self.services objectAtIndex:indexPath.row];
         
-        PreviewTableViewController *dest = (PreviewTableViewController *)segue.destinationViewController;
-        dest.title = s.serviceName;
-        dest.service= s;
+        PreviewTableViewController *destination = (PreviewTableViewController *)segue.destinationViewController;
+        destination.title = informationSource.serviceName;
+        destination.service= informationSource;
         
 
 }

@@ -9,6 +9,7 @@
 #import "PreviewTableViewController.h"
 #import "ServiceTableViewController.h"
 #import "Service.h"
+#import "DetailView.h"
 
 @interface PreviewTableViewController ()
 
@@ -79,7 +80,7 @@
             cell.detailTextLabel.text = @"please go back and search again";
         }
         
-        //case if Daylife
+    //case if Daylife
     } else if (self.service.serviceName == @"news") {
         if (daylifeResponse!= nil){
             cell.textLabel.text = [[daylifeNames valueForKey:@"name"] objectAtIndex:indexPath.row];
@@ -105,21 +106,35 @@
     }
     return cell;
 }
-
+ 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-/*    if ([segue.identifier isEqualToString:@"goTodetailView"]) {
-        UITableViewCell *cell =(UITableViewCell *)sender;
-        NSIndexPath *ip =  [self.tableView indexPathForCell:cell];
-        Service *s = [services objectAtIndex:ip.row];
+    /*   if ([segue.identifier isEqualToString:@"goToPreview"]) {
+            UITableViewCell *cell =(UITableViewCell *)sender;
+            NSIndexPath *ip =  [self.tableView indexPathForCell:cell];
+     
+            
+            DetailViewController *dest = (DetailViewController *)segue.destinationViewController;
+            if (self.service.serviceName == @"twitter") {
+                dest.title = [[twitterNames valueForKey:@"from_user_name"] objectAtIndex:ip.row];
+            }
+   
+    {*/
+        if ([[segue identifier] isEqualToString:@"goToDetailView"]) {
+            DetailViewController *detailViewController = [segue destinationViewController];
+            UITableViewCell *cell =(UITableViewCell *)sender;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            detailViewController.detailItem = indexPath;
+            
+            detailViewController.title = cell.textLabel.text;
+            detailViewController.message = cell.detailTextLabel.text;
+          NSLog(@"%@", cell.textLabel.text); //detailViewController.randomLabel.text);
+            
+        }
         
-        PreviewTableViewController *dest = (PreviewTableViewController *)segue.destinationViewController;
-        dest.title = s.serviceName;
-        dest.service= s;
-        
-        
-    }
- */
-}
+       
+  //  }
+  
+} 
 
 #pragma mark - Table view delegate
 
