@@ -32,7 +32,7 @@
 		3223DB6216B1307D00A3EF31 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3239CE1016B1CE3300D6AA9C /* Umami_News_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Umami_News_Logo.png; sourceTree = "<group>"; };
 		3239CE1316B1CE7E00D6AA9C /* Umami_News_Logo_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Umami_News_Logo_small.png; sourceTree = "<group>"; };
-		32475C4D16A1923E004543D6 /* umami_news.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = umami_news.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		32475C4D16A1923E004543D6 /* Umami News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Umami News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32475C5116A1923E004543D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		32475C5316A1923E004543D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32475C5516A1923E004543D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,7 +84,7 @@
 		32475C4E16A1923E004543D6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				32475C4D16A1923E004543D6 /* umami_news.app */,
+				32475C4D16A1923E004543D6 /* Umami News.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,7 +152,7 @@
 			);
 			name = "Umami News";
 			productName = umami_news;
-			productReference = 32475C4D16A1923E004543D6 /* umami_news.app */;
+			productReference = 32475C4D16A1923E004543D6 /* Umami News.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

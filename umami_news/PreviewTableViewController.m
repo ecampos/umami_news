@@ -151,7 +151,9 @@
             
             if (self.service.serviceName == @"twitter"){
                 if (twitterResponse != nil){
-                    NSURL *imageURL = [NSURL URLWithString:[[[twitterResponse objectForKey:@"results"] valueForKey:@"profile_image_url"] objectAtIndex:indexPath.row]];
+                    NSString *user =  [[[twitterResponse objectForKey:@"results"] valueForKey:@"from_user"] objectAtIndex:indexPath.row];
+                    
+                    NSURL *imageURL =  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", @"http://api.twitter.com/1/users/profile_image?screen_name=",user, @"&size=original"]];
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
                 } else {
@@ -180,6 +182,7 @@
                     NSURL *imageURL = [NSURL URLWithString:[[[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"image"] valueForKey:@"url"]objectAtIndex:indexPath.row]];
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                    
                     detailViewController.sourceLink = [[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"] valueForKey:@"url"] objectAtIndex:indexPath.row];
                 } else {
                     NSURL *imageURL = [NSURL URLWithString:@"https://twimg0-a.akamaihd.net/profile_images/68501526/daylife_sun.png"];
@@ -191,7 +194,11 @@
          
        }
  
-  
+- (NSString*)remove:(NSString*)textToRemove fromString:(NSString*)input
+{
+    return [input stringByReplacingOccurrencesOfString:textToRemove
+                                            withString:@""];
+}
 
 
 #pragma mark - Table view delegate
