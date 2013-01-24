@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *heroImage;
 @property (strong, nonatomic) IBOutlet UIView *dtailView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+@property (strong, nonatomic) IBOutlet UITextView *linkTextView;
+@property (strong)NSString *sourceLink;
 @property (strong)NSString *message;
 @property (strong)UIImage *imageCarrier;
 

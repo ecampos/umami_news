@@ -44,7 +44,6 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="2Ar-ue-YJc" id="7SS-7L-Lf7"/>
                         <outlet property="searchBar" destination="tAJ-YM-AwW" id="pTk-Xo-DB9"/>
                     </connections>
                 </tableViewController>
@@ -155,7 +154,16 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3K-Rt-IT3">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="313" id="9x0-1O-2LG"/>
+                                    <constraint firstAttribute="height" constant="249" id="z3X-pw-rPN"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfS-js-BDJ">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="105" id="1ft-xR-eMc"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -164,11 +172,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xOQ-3G-TBa" firstAttribute="centerX" secondItem="9sN-Tp-CLn" secondAttribute="centerX" type="default" id="0dI-Qp-NSI"/>
                             <constraint firstItem="d3K-Rt-IT3" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3ii-HA-9WP"/>
+                            <constraint firstAttribute="trailing" secondItem="d3K-Rt-IT3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CbD-ca-DeF"/>
                             <constraint firstItem="xOQ-3G-TBa" firstAttribute="centerX" secondItem="d3K-Rt-IT3" secondAttribute="centerX" type="default" id="D0l-zl-duo"/>
+                            <constraint firstAttribute="trailing" secondItem="qfS-js-BDJ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Hi4-cq-PHG"/>
                             <constraint firstItem="d3K-Rt-IT3" firstAttribute="top" secondItem="xOQ-3G-TBa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NxL-61-dNC"/>
                             <constraint firstItem="xOQ-3G-TBa" firstAttribute="top" secondItem="9sN-Tp-CLn" secondAttribute="top" constant="20" symbolic="YES" type="default" id="S7d-jf-FPK"/>
+                            <constraint firstItem="qfS-js-BDJ" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="iD2-gG-f4g"/>
+                            <constraint firstAttribute="bottom" secondItem="qfS-js-BDJ" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="wVM-aR-Sr1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NcZ-cZ-5lO"/>
@@ -176,6 +187,7 @@
                         <outlet property="contentTextView" destination="d3K-Rt-IT3" id="F7u-hL-A0Y"/>
                         <outlet property="dtailView" destination="9sN-Tp-CLn" id="tNB-Aw-NgF"/>
                         <outlet property="heroImage" destination="xOQ-3G-TBa" id="twU-tp-ydl"/>
+                        <outlet property="linkTextView" destination="qfS-js-BDJ" id="cIf-Kd-Lx9"/>
                         <outlet property="view" destination="9sN-Tp-CLn" id="KE0-m4-69R"/>
                     </connections>
                 </viewController>
@@ -191,6 +203,7 @@
                 <relationship kind="outlet" name="contentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="dtailView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="heroImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="linkTextView" candidateClass="UITextView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -202,7 +215,6 @@
         <class className="ServiceTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ServiceTableViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>

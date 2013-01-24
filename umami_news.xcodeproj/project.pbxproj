@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		03EB0F2016AC558E009C6A06 /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EB0F1F16AC558E009C6A06 /* MD5.m */; };
-		3215685B16AF42F7002FC5E0 /* f_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3215685A16AF42F7002FC5E0 /* f_logo.jpg */; };
 		32475C5216A1923E004543D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32475C5116A1923E004543D6 /* UIKit.framework */; };
 		32475C5416A1923E004543D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32475C5316A1923E004543D6 /* Foundation.framework */; };
 		32475C5616A1923E004543D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32475C5516A1923E004543D6 /* CoreGraphics.framework */; };
@@ -28,7 +27,7 @@
 /* Begin PBXFileReference section */
 		03EB0F1E16AC558E009C6A06 /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
 		03EB0F1F16AC558E009C6A06 /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
-		3215685A16AF42F7002FC5E0 /* f_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = f_logo.jpg; sourceTree = "<group>"; };
+		3223DB6216B1307D00A3EF31 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		32475C4D16A1923E004543D6 /* umami_news.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = umami_news.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32475C5116A1923E004543D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		32475C5316A1923E004543D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,6 +86,7 @@
 		32475C5016A1923E004543D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3223DB6216B1307D00A3EF31 /* Social.framework */,
 				32475C5116A1923E004543D6 /* UIKit.framework */,
 				32475C5316A1923E004543D6 /* Foundation.framework */,
 				32475C5516A1923E004543D6 /* CoreGraphics.framework */,
@@ -118,7 +118,6 @@
 		32475C5816A1923E004543D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3215685A16AF42F7002FC5E0 /* f_logo.jpg */,
 				32475C5916A1923E004543D6 /* umami_news-Info.plist */,
 				32475C5A16A1923E004543D6 /* InfoPlist.strings */,
 				32475C5D16A1923E004543D6 /* main.m */,
@@ -186,7 +185,6 @@
 				32475C6616A1923E004543D6 /* Default@2x.png in Resources */,
 				32475C6816A1923E004543D6 /* Default-568h@2x.png in Resources */,
 				32475C6B16A1923E004543D6 /* MainStoryboard.storyboard in Resources */,
-				3215685B16AF42F7002FC5E0 /* f_logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,9 +280,14 @@
 		32475C7216A1923E004543D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umami_news/umami_news-Prefix.pch";
 				INFOPLIST_FILE = "umami_news/umami_news-Info.plist";
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -293,9 +296,14 @@
 		32475C7316A1923E004543D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umami_news/umami_news-Prefix.pch";
 				INFOPLIST_FILE = "umami_news/umami_news-Info.plist";
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

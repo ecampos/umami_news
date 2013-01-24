@@ -18,7 +18,7 @@
 @end
 
 @implementation ServiceTableViewController
-@synthesize services, activityIndicator;
+@synthesize services;
 
 - (void)viewDidLoad
 {
@@ -37,60 +37,13 @@
 
 }
 
+
 -(void) searchBarSearchButtonClicked:(UISearchBar*) searchBar
 {
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        //input parameters
-        NSString *query = searchBar.text;
-        
-        NSString *twitter = @"http://search.twitter.com/search.json?q=";
-        NSString *daylife  = @"http://freeapi.daylife.com/jsonrest/publicapi/4.10/search_getRelatedArticles?";
-        NSString *facebook = @"https://graph.facebook.com/search?q=";
-        
-        NSString *facebookObjectType = @"&type=post"; //Facebook Specific
-        //Daylife Specific
-        
-        NSString *accessKey = @"4d68ec63b744eec43fffad2fa9af98d1"; //Daylife Specific
-        NSString *signatureCombiner = [NSString stringWithFormat:@"%@%@%@", accessKey, @"fd6167e10d2a54abe0206789adbaac09", query];
-        NSString *capSignature = [signatureCombiner MD5String];
-        NSString *signature = [capSignature lowercaseString];
-        
-        
-        // request perparation
-        
-        NSString *daylifeURLString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", daylife,@"query=", query, @"&accesskey=", accessKey, @"&signature=", signature];
-  //      NSstring *new = [daylifeURLString stringby]
-        NSString *escapedDaylife = [daylifeURLString stringByAddingPercentEscapesUsingEncoding:
-        NSUTF8StringEncoding];
-        NSURL *daylifeURL =[NSURL URLWithString:escapedDaylife];
-        NSData *daylifeData = [NSData dataWithContentsOfURL:daylifeURL];
-
-        
-        NSString *twitterURLString = [NSString stringWithFormat:@"%@%@%@", twitter, query, @"&lang=en"];
-        NSString *escapedTwitter = [twitterURLString stringByAddingPercentEscapesUsingEncoding:
-                                    NSUTF8StringEncoding];
-        NSURL *twitterURL = [NSURL URLWithString:escapedTwitter];
-        NSData *twitterData = [NSData dataWithContentsOfURL:twitterURL];
-        
-        NSString *facebookURLString = [NSString stringWithFormat:@"%@%@%@", facebook, query, facebookObjectType];
-        NSString *escapedFacebook = [facebookURLString stringByAddingPercentEscapesUsingEncoding:
-                                     NSUTF8StringEncoding];
-        NSURL *facebookURL = [NSURL URLWithString:escapedFacebook];
-        NSData *facebookData = [NSData dataWithContentsOfURL:facebookURL];
-        
-        NSError *error;
-        
-        twitterResponse = [NSJSONSerialization JSONObjectWithData:twitterData
-                                                          options:kNilOptions
-                                                            error:&error];
-        daylifeResponse = [NSJSONSerialization JSONObjectWithData:daylifeData
-                                                          options:kNilOptions
-                                                            error:&error];
-        facebookResponse = [NSJSONSerialization JSONObjectWithData:facebookData
-                                                           options:kNilOptions error:&error];
-        
+        aquery = searchBar.text;
+        [Service getFacebook:aquery];
+        [Service getNews:aquery];
+        [Service getTwitter:aquery];
         
         twitterNames = [twitterResponse objectForKey:@"results"];
         twitterContent = [twitterResponse objectForKey:@"results"];
@@ -98,17 +51,9 @@
         daylifeContent = [[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"];
         facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
         facebookContent = [facebookResponse objectForKey:@"data"];
-        
-        NSLog(@"%@", facebookResponse);
- //       NSLog(@"%@", facebookNames);
-        
-        if (facebookContent != nil) {
-        [self.activityIndicator stopAnimating];
-        }
-
-    });
-    [searchBar resignFirstResponder];
+        [searchBar resignFirstResponder];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
