@@ -59,8 +59,7 @@
     twitterResponse = [NSJSONSerialization JSONObjectWithData:twitterData
                                                       options:kNilOptions
                                                         error:&error];
-    
-    
+
     return twitterResponse;
 }
 
