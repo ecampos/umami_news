@@ -40,6 +40,7 @@
 
 -(void) searchBarSearchButtonClicked:(UISearchBar*) searchBar
 {
+
         aquery = searchBar.text;
         [Service getFacebook:aquery];
         [Service getNews:aquery];
@@ -52,6 +53,7 @@
         facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
         facebookContent = [facebookResponse objectForKey:@"data"];
         [searchBar resignFirstResponder];
+   
 }
 
 

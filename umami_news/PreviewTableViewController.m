@@ -31,12 +31,13 @@
 }
 
 #pragma mark - Table view data source
-
+// Number of sections (always 1)
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
+//number of cells
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.service.serviceName == @"twitter"){
@@ -61,6 +62,7 @@
         return 1;
     }
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -97,8 +99,8 @@
     } else if (self.service.serviceName == @"facebook") {
         
         if (facebookResponse!= nil){
-            NSString *messageValue = [[[facebookResponse objectForKey:@"data"] valueForKey:@"message"] objectAtIndex:indexPath.row];
-            NSString *linkValue = [[[facebookResponse objectForKey:@"data"] valueForKey:@"link"] objectAtIndex:indexPath.row];
+            NSString *messageValue = [[facebookContent  valueForKey:@"message"] objectAtIndex:indexPath.row];
+            NSString *linkValue = [[facebookContent  valueForKey:@"link"] objectAtIndex:indexPath.row];
 
             if (messageValue != ( NSString *) [ NSNull null]){
                 cell.detailTextLabel.text = messageValue;
@@ -111,18 +113,13 @@
                 cell.detailTextLabel.text = @"no message for this post";
             }
        
-            cell.textLabel.text = [[[[facebookResponse objectForKey:@"data"] valueForKey:@"from"]  valueForKey:@"name"] objectAtIndex:indexPath.row];
+            cell.textLabel.text = [[facebookNames valueForKey:@"name"] objectAtIndex:indexPath.row];
             
         }else {
             cell.textLabel.text = @"Nothing to see here";
             cell.detailTextLabel.text = @"please go back and search again";
         }
-        
-    
-        
-        
-        
-        
+
         
         //case invalid service Name
     } else {
@@ -131,6 +128,8 @@
     }
     return cell;
 }
+
+
  //Data for next View
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
  NSError *error;

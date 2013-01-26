@@ -26,6 +26,21 @@
     return self;
     
 }
++(NSDictionary*)getTwitter:(NSString *)query
+{
+    NSError *error;
+    NSString *twitter = @"http://search.twitter.com/search.json?q=";
+    NSString *twitterURLString = [NSString stringWithFormat:@"%@%@%@", twitter, aquery, @"&lang=en"];
+    NSString *escapedTwitter = [twitterURLString stringByAddingPercentEscapesUsingEncoding:
+                                NSUTF8StringEncoding];
+    NSURL *twitterURL = [NSURL URLWithString:escapedTwitter];
+    NSData *twitterData = [NSData dataWithContentsOfURL:twitterURL];
+    twitterResponse = [NSJSONSerialization JSONObjectWithData:twitterData
+                                                      options:kNilOptions
+                                                        error:&error];
+    return twitterResponse;
+}
+
 +(NSDictionary*)getFacebook:(NSString *)query
 {
     
@@ -46,32 +61,15 @@
     return facebookResponse;
 }
 
-
-+(NSDictionary*)getTwitter:(NSString *)query
-{
-    NSError *error;
-    NSString *twitter = @"http://search.twitter.com/search.json?q=";
-    NSString *twitterURLString = [NSString stringWithFormat:@"%@%@%@", twitter, aquery, @"&lang=en"];
-    NSString *escapedTwitter = [twitterURLString stringByAddingPercentEscapesUsingEncoding:
-                                NSUTF8StringEncoding];
-    NSURL *twitterURL = [NSURL URLWithString:escapedTwitter];
-    NSData *twitterData = [NSData dataWithContentsOfURL:twitterURL];
-    twitterResponse = [NSJSONSerialization JSONObjectWithData:twitterData
-                                                      options:kNilOptions
-                                                        error:&error];
-
-    return twitterResponse;
-}
-
 +(NSDictionary*)getNews:(NSString *)query
 {
         NSError *error;
       NSString *daylife  = @"http://freeapi.daylife.com/jsonrest/publicapi/4.10/search_getRelatedArticles?";
     NSString *accessKey = @"4d68ec63b744eec43fffad2fa9af98d1"; //Daylife Specific
     NSString *signatureCombiner = [NSString stringWithFormat:@"%@%@%@", accessKey, @"fd6167e10d2a54abe0206789adbaac09", aquery];
-    NSString *capSignature = [signatureCombiner MD5String];
-    NSString *signature = [capSignature lowercaseString];
-    
+    NSString *allCapsSignature = [signatureCombiner MD5String];
+    NSString *signature = [allCapsSignature lowercaseString];
+    // changing an all Caps String to lowercase
     NSString *daylifeURLString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", daylife,@"query=", aquery, @"&has_image=1&include_image=1", @"&accesskey=", accessKey, @"&signature=", signature];
     NSString *escapedDaylife = [daylifeURLString stringByAddingPercentEscapesUsingEncoding:
                                 NSUTF8StringEncoding];

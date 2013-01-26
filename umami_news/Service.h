@@ -28,7 +28,7 @@ NSString *aquery;
 @property (strong)NSDictionary *contentDictionary;
 
 @property (strong)NSString *serviceName;
-@property (strong)NSString *aquery;
+//@property (strong)NSString *aquery;
 
 @property (strong)NSDictionary *twitterResponse;
 @property (strong)NSDictionary *daylifeResponse;
