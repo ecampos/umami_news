@@ -147,15 +147,12 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" type="user" id="12G-Jr-6uQ"/>
                                     <constraint firstAttribute="width" priority="1" constant="100" type="user" id="3Ig-LF-ter"/>
-                                    <constraint firstAttribute="height" constant="99" id="EjD-UL-gUn"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" type="user" id="TAp-aI-WnO"/>
+                                    <constraint firstAttribute="height" constant="167" id="ygu-YY-dk2"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3K-Rt-IT3">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="249" id="z3X-pw-rPN"/>
-                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -163,7 +160,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfS-js-BDJ">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="105" id="1ft-xR-eMc"/>
+                                    <constraint firstAttribute="height" constant="67" id="vOr-kf-nn7"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -173,11 +170,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="d3K-Rt-IT3" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3ii-HA-9WP"/>
+                            <constraint firstAttribute="bottom" secondItem="d3K-Rt-IT3" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="61P-LJ-ZXK"/>
                             <constraint firstAttribute="trailing" secondItem="d3K-Rt-IT3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CbD-ca-DeF"/>
-                            <constraint firstItem="xOQ-3G-TBa" firstAttribute="centerX" secondItem="d3K-Rt-IT3" secondAttribute="centerX" type="default" id="D0l-zl-duo"/>
+                            <constraint firstItem="xOQ-3G-TBa" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="G6V-QC-vXu"/>
                             <constraint firstAttribute="trailing" secondItem="qfS-js-BDJ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Hi4-cq-PHG"/>
-                            <constraint firstItem="d3K-Rt-IT3" firstAttribute="top" secondItem="xOQ-3G-TBa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NxL-61-dNC"/>
+                            <constraint firstAttribute="trailing" secondItem="xOQ-3G-TBa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LnV-1t-n1j"/>
                             <constraint firstItem="xOQ-3G-TBa" firstAttribute="top" secondItem="9sN-Tp-CLn" secondAttribute="top" constant="20" symbolic="YES" type="default" id="S7d-jf-FPK"/>
+                            <constraint firstItem="d3K-Rt-IT3" firstAttribute="top" secondItem="xOQ-3G-TBa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="g3V-R3-o5c"/>
                             <constraint firstItem="qfS-js-BDJ" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="iD2-gG-f4g"/>
                             <constraint firstAttribute="bottom" secondItem="qfS-js-BDJ" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="wVM-aR-Sr1"/>
                         </constraints>
