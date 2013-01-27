@@ -19,7 +19,9 @@ NSDictionary *facebookNames;
 NSDictionary *twitterContent;
 NSDictionary *daylifeContent;
 NSDictionary *facebookContent;
-NSString *aquery;
+
+
+NSString *query;
 
 @interface Service : NSObject
 
@@ -28,25 +30,12 @@ NSString *aquery;
 @property (strong)NSDictionary *contentDictionary;
 
 @property (strong)NSString *serviceName;
-//@property (strong)NSString *aquery;
-
-@property (strong)NSDictionary *twitterResponse;
-@property (strong)NSDictionary *daylifeResponse;
-@property (strong)NSDictionary *facebookResponse;
-
-@property (strong)NSDictionary *twitterNames;
-@property (strong)NSDictionary *daylifeNames;
-@property (strong)NSDictionary *facebookNames;
-
-@property (strong)NSDictionary *twitterContent;
-@property (strong)NSDictionary *daylifeContent;
-@property (strong)NSDictionary *facebookContent;
 
 -(id)initServiceName:(NSString *)aServiceName  resultDictionary:(NSDictionary *)aResultDictionary nameDictionary:(NSDictionary *)aNameDictionary contentDictionary:(NSDictionary *)aContentDictionary;
 
-+(NSDictionary*) getTwitter:(NSString *)query;
-+(NSDictionary*) getNews:(NSString *)query;
-+(NSDictionary*) getFacebook:(NSString *)query;
++(void) getTwitter:(NSString *)aQuery;
++(void) getNews:(NSString *)aQuery;
++(void) getFacebook:(NSString *)aQuery;
 
 
 @end

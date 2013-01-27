@@ -22,10 +22,17 @@
 
 - (void)viewDidLoad
 {
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    spinner.frame = CGRectMake(0, 0, 320, 44);
+    self.tableView.tableFooterView = _spinner;
+        self.tableView.rowHeight = 60.0;
     [super viewDidLoad];
     //add Search Bar to Navigation View
     self.searchBar.delegate =self;
     self.navigationItem.titleView = self.searchBar;
+    self.searchBar.tintColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
+    self.searchBar.placeholder = @"what are you interested in?";
     
     //create service objects that contain Data
     Service *twitterService = [[Service alloc] initServiceName:@"twitter" resultDictionary:twitterResponse nameDictionary:twitterNames contentDictionary:twitterContent];
@@ -40,11 +47,14 @@
 
 -(void) searchBarSearchButtonClicked:(UISearchBar*) searchBar
 {
+    
+    [_spinner startAnimating];
 
-        aquery = searchBar.text;
-        [Service getFacebook:aquery];
-        [Service getNews:aquery];
-        [Service getTwitter:aquery];
+    
+        query = searchBar.text;
+        [Service getFacebook:query];
+        [Service getNews:query];
+        [Service getTwitter:query];
         
         twitterNames = [twitterResponse objectForKey:@"results"];
         twitterContent = [twitterResponse objectForKey:@"results"];
@@ -53,6 +63,8 @@
         facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
         facebookContent = [facebookResponse objectForKey:@"data"];
         [searchBar resignFirstResponder];
+    [_spinner stopAnimating];
+    _spinner.hidden = TRUE;
    
 }
 
@@ -62,8 +74,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -75,8 +85,6 @@
     //number of rows
     return services.count;
 }
-//[[self theTableViewToChangeItsHeader]reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -105,11 +113,8 @@
         destination.title = informationSource.serviceName;
         destination.service= informationSource;
         
-
+    }
 }
-}
-  
 
-#pragma mark - Table view delegate
 
 @end

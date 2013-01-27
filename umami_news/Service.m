@@ -26,11 +26,10 @@
     return self;
     
 }
-+(NSDictionary*)getTwitter:(NSString *)query
++(void)getTwitter:(NSString *)aQuery
 {
     NSError *error;
-    NSString *twitter = @"http://search.twitter.com/search.json?q=";
-    NSString *twitterURLString = [NSString stringWithFormat:@"%@%@%@", twitter, aquery, @"&lang=en"];
+    NSString *twitterURLString = [NSString stringWithFormat:@"%@%@%@", @"http://search.twitter.com/search.json?q=", aQuery, @"&lang=en"];
     NSString *escapedTwitter = [twitterURLString stringByAddingPercentEscapesUsingEncoding:
                                 NSUTF8StringEncoding];
     NSURL *twitterURL = [NSURL URLWithString:escapedTwitter];
@@ -38,18 +37,15 @@
     twitterResponse = [NSJSONSerialization JSONObjectWithData:twitterData
                                                       options:kNilOptions
                                                         error:&error];
-    return twitterResponse;
+
 }
 
-+(NSDictionary*)getFacebook:(NSString *)query
++(void)getFacebook:(NSString *)aQuery
 {
     
     NSError *error;
-    NSString *facebook = @"https://graph.facebook.com/search?q=";
-    
     NSString *facebookObjectType = @"&type=post&filter=message&fields=description,message,from";
-    
-    NSString *facebookURLString = [NSString stringWithFormat:@"%@%@%@", facebook, query, facebookObjectType];
+    NSString *facebookURLString = [NSString stringWithFormat:@"%@%@%@", @"https://graph.facebook.com/search?q=", aQuery, facebookObjectType];
     NSString *escapedFacebook = [facebookURLString stringByAddingPercentEscapesUsingEncoding:
                                  NSUTF8StringEncoding];
     NSURL *facebookURL = [NSURL URLWithString:escapedFacebook];
@@ -57,20 +53,19 @@
     
     facebookResponse = [NSJSONSerialization JSONObjectWithData:facebookData
                                                        options:kNilOptions error:&error];
-    
-    return facebookResponse;
+
 }
 
-+(NSDictionary*)getNews:(NSString *)query
++(void)getNews:(NSString *)aQuery
 {
-        NSError *error;
-      NSString *daylife  = @"http://freeapi.daylife.com/jsonrest/publicapi/4.10/search_getRelatedArticles?";
+    NSError *error;
+    NSString *daylife  = @"http://freeapi.daylife.com/jsonrest/publicapi/4.10/search_getRelatedArticles?";
     NSString *accessKey = @"4d68ec63b744eec43fffad2fa9af98d1"; //Daylife Specific
-    NSString *signatureCombiner = [NSString stringWithFormat:@"%@%@%@", accessKey, @"fd6167e10d2a54abe0206789adbaac09", aquery];
+    NSString *signatureCombiner = [NSString stringWithFormat:@"%@%@%@", accessKey, @"fd6167e10d2a54abe0206789adbaac09", aQuery];
     NSString *allCapsSignature = [signatureCombiner MD5String];
+      // changing an all Caps String to lowercase
     NSString *signature = [allCapsSignature lowercaseString];
-    // changing an all Caps String to lowercase
-    NSString *daylifeURLString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", daylife,@"query=", aquery, @"&has_image=1&include_image=1", @"&accesskey=", accessKey, @"&signature=", signature];
+    NSString *daylifeURLString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", daylife,@"query=", aQuery, @"&has_image=1&include_image=1", @"&accesskey=", accessKey, @"&signature=", signature];
     NSString *escapedDaylife = [daylifeURLString stringByAddingPercentEscapesUsingEncoding:
                                 NSUTF8StringEncoding];
     NSURL *daylifeURL =[NSURL URLWithString:escapedDaylife];
@@ -79,7 +74,6 @@
                                                       options:kNilOptions
                                                         error:&error];
     
-    return daylifeResponse;
 }
 
 

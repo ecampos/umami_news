@@ -62,7 +62,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
             </objects>
-            <point key="canvasLocation" x="399" y="276"/>
+            <point key="canvasLocation" x="451" y="268"/>
         </scene>
         <!--Preview Table View Controller-->
         <scene sceneID="oAS-Cx-1BB">
@@ -108,7 +108,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHv-yt-wJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816" y="287"/>
+            <point key="canvasLocation" x="910" y="268"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d0W-3s-7mY">
@@ -145,10 +145,8 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="xOQ-3G-TBa" userLabel="heroImage">
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" type="user" id="12G-Jr-6uQ"/>
-                                    <constraint firstAttribute="width" priority="1" constant="100" type="user" id="3Ig-LF-ter"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" type="user" id="TAp-aI-WnO"/>
-                                    <constraint firstAttribute="height" constant="167" id="ygu-YY-dk2"/>
+                                    <constraint firstAttribute="height" constant="174" id="2Ju-Ln-Djz"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="850" constant="280" type="user" id="TAp-aI-WnO"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3K-Rt-IT3">
@@ -160,7 +158,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfS-js-BDJ">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="67" id="vOr-kf-nn7"/>
+                                    <constraint firstAttribute="height" constant="46" id="JHH-Lu-K3T"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -170,13 +168,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="d3K-Rt-IT3" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3ii-HA-9WP"/>
-                            <constraint firstAttribute="bottom" secondItem="d3K-Rt-IT3" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="61P-LJ-ZXK"/>
+                            <constraint firstItem="d3K-Rt-IT3" firstAttribute="top" secondItem="xOQ-3G-TBa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="BYf-hE-FHD"/>
                             <constraint firstAttribute="trailing" secondItem="d3K-Rt-IT3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CbD-ca-DeF"/>
                             <constraint firstItem="xOQ-3G-TBa" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="G6V-QC-vXu"/>
                             <constraint firstAttribute="trailing" secondItem="qfS-js-BDJ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Hi4-cq-PHG"/>
                             <constraint firstAttribute="trailing" secondItem="xOQ-3G-TBa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LnV-1t-n1j"/>
                             <constraint firstItem="xOQ-3G-TBa" firstAttribute="top" secondItem="9sN-Tp-CLn" secondAttribute="top" constant="20" symbolic="YES" type="default" id="S7d-jf-FPK"/>
-                            <constraint firstItem="d3K-Rt-IT3" firstAttribute="top" secondItem="xOQ-3G-TBa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="g3V-R3-o5c"/>
+                            <constraint firstAttribute="bottom" secondItem="d3K-Rt-IT3" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="aij-Hs-hsm"/>
                             <constraint firstItem="qfS-js-BDJ" firstAttribute="leading" secondItem="9sN-Tp-CLn" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="iD2-gG-f4g"/>
                             <constraint firstAttribute="bottom" secondItem="qfS-js-BDJ" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="wVM-aR-Sr1"/>
                         </constraints>
@@ -192,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dvh-mE-2qG" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1244" y="281"/>
+            <point key="canvasLocation" x="1364" y="268"/>
         </scene>
     </scenes>
     <classes>
@@ -215,6 +213,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ServiceTableViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
             </relationships>
         </class>
     </classes>

@@ -21,7 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        self.tableView.rowHeight = 60.0;
+    self.tableView.rowHeight = 60.0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +79,7 @@
             cell.textLabel.text = [[twitterNames valueForKey:@"from_user_name"] objectAtIndex:indexPath.row];
             cell.detailTextLabel.text = [[twitterContent valueForKey:@"text"] objectAtIndex:indexPath.row];
  //           cell.imageView = [[[twitterResponse objectForKey:@"results"] valueForKey:@"profile_image_url"] objectAtIndex:indexPath.row];
-        }else {
+        } else {
             cell.textLabel.text = @"Nothing to see here";
             cell.detailTextLabel.text = @"please go back and search again";
         }
@@ -89,7 +89,7 @@
         if (daylifeResponse!= nil){
             cell.textLabel.text = [[daylifeNames valueForKey:@"name"] objectAtIndex:indexPath.row];
             cell.detailTextLabel.text = [[daylifeContent valueForKey:@"headline"] objectAtIndex:indexPath.row];
-        }else {
+        } else {
             cell.textLabel.text = @"Nothing to see here";
             cell.detailTextLabel.text = @"please go back and search again";
    
@@ -144,7 +144,7 @@
             
             if (self.service.serviceName == @"news" && daylifeNames != nil){
                 detailViewController.message = [[daylifeContent valueForKey:@"excerpt"] objectAtIndex:indexPath.row];
-            } else{
+            } else {
             detailViewController.message = cell.detailTextLabel.text;
             }
             

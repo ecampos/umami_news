@@ -10,4 +10,5 @@
 @interface ServiceTableViewController : UITableViewController <UISearchBarDelegate, UITableViewDelegate> 
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong) IBOutlet UIActivityIndicatorView *spinner;
 @end
