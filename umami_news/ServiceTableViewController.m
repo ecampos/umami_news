@@ -56,11 +56,7 @@
     
     spinner.hidden = FALSE;
     [spinner startAnimating];
-    if(![self connected])
-    {
-        // not connected
-    } else
-    {
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             
@@ -93,7 +89,7 @@
             
         });
 
-    }
+    
     
 
        [self.tableView reloadData];
