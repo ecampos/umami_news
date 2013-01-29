@@ -12,27 +12,30 @@
 #import "MD5.h"
 
 
+
 @interface ServiceTableViewController ()
 @property (strong) NSArray *services;
 
 @end
 
 @implementation ServiceTableViewController
-@synthesize services;
+@synthesize services, spinner;
 
 - (void)viewDidLoad
 {
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    spinner.frame = CGRectMake(0, 0, 320, 44);
-    self.tableView.tableFooterView = _spinner;
-        self.tableView.rowHeight = 60.0;
+
     [super viewDidLoad];
+    
+    self.spinner.hidden= TRUE;
+    [spinner hidesWhenStopped];
+    
     //add Search Bar to Navigation View
     self.searchBar.delegate =self;
     self.navigationItem.titleView = self.searchBar;
     self.searchBar.tintColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
     self.searchBar.placeholder = @"what are you interested in?";
+    
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
     
     //create service objects that contain Data
     Service *twitterService = [[Service alloc] initServiceName:@"twitter" resultDictionary:twitterResponse nameDictionary:twitterNames contentDictionary:twitterContent];
@@ -45,27 +48,56 @@
 }
 
 
+
 -(void) searchBarSearchButtonClicked:(UISearchBar*) searchBar
 {
     
-    [_spinner startAnimating];
-
+    [searchBar resignFirstResponder];
     
-        query = searchBar.text;
-        [Service getFacebook:query];
-        [Service getNews:query];
-        [Service getTwitter:query];
-        
-        twitterNames = [twitterResponse objectForKey:@"results"];
-        twitterContent = [twitterResponse objectForKey:@"results"];
-        daylifeNames = [[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"source"];
-        daylifeContent = [[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"];
-        facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
-        facebookContent = [facebookResponse objectForKey:@"data"];
-        [searchBar resignFirstResponder];
-    [_spinner stopAnimating];
-    _spinner.hidden = TRUE;
-   
+    spinner.hidden = FALSE;
+    [spinner startAnimating];
+    if(![self connected])
+    {
+        // not connected
+    } else
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            
+            
+            [self.tableView reloadData];
+            query = searchBar.text;
+            [Service getFacebook:query];
+            
+            [Service getNews:query];
+            
+            [Service getTwitter:query];
+            
+            
+            twitterNames = [twitterResponse objectForKey:@"results"];
+            twitterContent = [twitterResponse objectForKey:@"results"];
+            NSLog(@"%@", @"twitter done");
+            daylifeNames = [[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"source"];
+            daylifeContent = [[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"];
+            NSLog(@"%@", @"news done");
+            facebookNames = [[facebookResponse objectForKey:@"data"] valueForKey:@"from"];
+            facebookContent = [facebookResponse objectForKey:@"data"];
+            NSLog(@"%@", @"facebook done");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [spinner stopAnimating];
+                spinner.hidden = true;
+                
+                
+            });
+            
+            
+        });
+
+    }
+    
+
+       [self.tableView reloadData];
+
 }
 
 
@@ -100,6 +132,14 @@
     cell.textLabel.textColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
     return cell;
 
+}
+
+- (BOOL)connected
+{
+/*    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);*/
+    return false;
 }
 
 

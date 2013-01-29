@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface ServiceTableViewController : UITableViewController <UISearchBarDelegate, UITableViewDelegate> 
+@interface ServiceTableViewController : UITableViewController <UISearchBarDelegate, UITableViewDelegate>
+
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong) IBOutlet UIActivityIndicatorView *spinner;
+- (BOOL)connected ;
+
+
 @end
