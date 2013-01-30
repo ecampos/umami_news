@@ -1,5 +1,5 @@
 //
-//  ServiceContainer.h
+//  Service.h
 //  umami_news
 //
 //  Created by Emanuel Campos on 17.01.13.

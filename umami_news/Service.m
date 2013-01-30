@@ -1,5 +1,5 @@
 //
-//  ServiceContainer.m
+//  Service.m
 //  umami_news
 //
 //  Created by Emanuel Campos on 17.01.13.
@@ -14,6 +14,7 @@
 
 @synthesize serviceName, resultDictionary, nameDictionary, contentDictionary;
 
+//object constructor
 -(id)initServiceName:(NSString *)aServiceName  resultDictionary:(NSDictionary *)aResultDictionary nameDictionary:(NSDictionary *)aNameDictionary contentDictionary:(NSDictionary *)aContentDictionary;
 {
     self=[super init];
@@ -26,8 +27,10 @@
     return self;
     
 }
+//classmethod calling Twitter web request
 +(void)getTwitter:(NSString *)aQuery
 {
+
     NSError *error;
     NSString *twitterURLString = [NSString stringWithFormat:@"%@%@%@", @"http://search.twitter.com/search.json?q=", aQuery, @"&lang=en"];
     NSString *escapedTwitter = [twitterURLString stringByAddingPercentEscapesUsingEncoding:
@@ -39,7 +42,7 @@
                                                         error:&error];
 
 }
-
+//classmethod calling Facebook web request
 +(void)getFacebook:(NSString *)aQuery
 {
     
@@ -55,7 +58,7 @@
                                                        options:kNilOptions error:&error];
 
 }
-
+//classmethod calling Daylife web request
 +(void)getNews:(NSString *)aQuery
 {
     NSError *error;
@@ -63,7 +66,7 @@
     NSString *accessKey = @"4d68ec63b744eec43fffad2fa9af98d1"; //Daylife Specific
     NSString *signatureCombiner = [NSString stringWithFormat:@"%@%@%@", accessKey, @"fd6167e10d2a54abe0206789adbaac09", aQuery];
     NSString *allCapsSignature = [signatureCombiner MD5String];
-      // changing an all Caps String to lowercase
+      // changing an all Caps String to lowercase (Daylife is case sensitive)
     NSString *signature = [allCapsSignature lowercaseString];
     NSString *daylifeURLString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", daylife,@"query=", aQuery, @"&has_image=1&include_image=1", @"&accesskey=", accessKey, @"&signature=", signature];
     NSString *escapedDaylife = [daylifeURLString stringByAddingPercentEscapesUsingEncoding:

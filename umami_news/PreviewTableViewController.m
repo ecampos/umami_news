@@ -27,17 +27,18 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    daylifeResponse = nil;
+    facebookResponse = nil;
+    twitterResponse = nil;
 }
 
-#pragma mark - Table view data source
 // Number of sections (always 1)
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-//number of cells
+//number of cells for each service
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.service.serviceName == @"twitter"){
@@ -63,15 +64,18 @@
     }
 }
 
-
+//this method will fill the cells depending on which service was selected in the view before
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"previewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    //prepare Umami-specific colors
     cell.backgroundColor =[UIColor colorWithRed:236/255.0f green:236/255.0f blue:231/255.0f alpha:1.0];
     cell.textLabel.textColor = [UIColor colorWithRed:15/255.0f green:61/255.0f blue:72/255.0f alpha:1.0];
     cell.detailTextLabel.textColor = [UIColor colorWithRed:54/255.0f green:103/255.0f blue:116/255.0f alpha:1.0];
+    
+    //try catch will capture cases where the results are Null or something else went wrong
     @try {
         
         //case if Twitter
@@ -79,7 +83,6 @@
             if (twitterResponse!= nil){
                 cell.textLabel.text = [[twitterNames valueForKey:@"from_user_name"] objectAtIndex:indexPath.row];
                 cell.detailTextLabel.text = [[twitterContent valueForKey:@"text"] objectAtIndex:indexPath.row];
-                //           cell.imageView = [[[twitterResponse objectForKey:@"results"] valueForKey:@"profile_image_url"] objectAtIndex:indexPath.row];
             } else {
                 cell.textLabel.text = @"Nothing to see here";
                 cell.detailTextLabel.text = @"please go back and search again";
@@ -93,34 +96,28 @@
             } else {
                 cell.textLabel.text = @"Nothing to see here";
                 cell.detailTextLabel.text = @"please go back and search again";
-                
             }
             
             //case if Facebook
         } else if (self.service.serviceName == @"facebook") {
-            
             if (facebookResponse!= nil){
                 NSString *messageValue = [[facebookContent  valueForKey:@"message"] objectAtIndex:indexPath.row];
                 NSString *linkValue = [[facebookContent  valueForKey:@"link"] objectAtIndex:indexPath.row];
                 
+                //Facebook has cases where not all expected fields are returned this block catches these cases -> avoids crash
+                
                 if (messageValue != ( NSString *) [ NSNull null]){
                     cell.detailTextLabel.text = messageValue;
-                    
                 } else if (!messageValue && linkValue != ( NSString *) [ NSNull null]){
                     cell.detailTextLabel.text =linkValue;
-                    
-                    
                 } else {
                     cell.detailTextLabel.text = @"no message for this post";
                 }
-                
                 cell.textLabel.text = [[facebookNames valueForKey:@"name"] objectAtIndex:indexPath.row];
-                
-            }else {
+            } else {
                 cell.textLabel.text = @"Nothing to see here";
                 cell.detailTextLabel.text = @"please go back and search again";
             }
-            
             
             //case invalid service Name
         } else {
@@ -128,6 +125,7 @@
             cell.detailTextLabel.text = @"please go back and try not to break anything";
         }
     }
+    
     @catch (NSException *exception) {
         if (self.service.serviceName == @"facebook") {
             if (facebookNames.count == 0){
@@ -165,7 +163,8 @@
 }
 
 
- //Data for next View
+ //Data for next View depending on which service is currently displayed
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
  NSError *error;
         if ([[segue identifier] isEqualToString:@"goToDetailView"]) {
@@ -176,17 +175,16 @@
             detailViewController.detailItem = indexPath;
             detailViewController.title = cell.textLabel.text;
             
-            
             if (self.service.serviceName == @"news" && daylifeNames != nil){
                 detailViewController.message = [[daylifeContent valueForKey:@"excerpt"] objectAtIndex:indexPath.row];
             } else {
             detailViewController.message = cell.detailTextLabel.text;
             }
-            
+            //passes twitter specific parameters and queries for the user image based on user id in the original post
             if (self.service.serviceName == @"twitter"){
                 if (twitterResponse != nil){
                     NSString *user =  [[[twitterResponse objectForKey:@"results"] valueForKey:@"from_user"] objectAtIndex:indexPath.row];
-                    
+                    //search for picture and display
                     NSURL *imageURL =  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", @"http://api.twitter.com/1/users/profile_image?screen_name=",user, @"&size=original"]];
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
@@ -196,11 +194,11 @@
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
              
                 }
-                
+             //passes facebook specific parameters and queries for the user image based on user id in the original post
             } else if (self.service.serviceName == @"facebook"){
                 if (facebookResponse != nil){
                     NSString *user = [[[[facebookResponse objectForKey:@"data"] valueForKey:@"from"] valueForKey:@"id"] objectAtIndex:indexPath.row];
-                    NSString *fbURL = [NSString stringWithFormat:@"%@%@%@", @"https://graph.facebook.com/", user, @"/picture?type=normal" ];
+                    NSString *fbURL = [NSString stringWithFormat:@"%@%@%@", @"https://graph.facebook.com/", user, @"/picture?type=large" ];
                     NSURL *imageURL = [NSURL URLWithString:fbURL];
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
@@ -210,7 +208,7 @@
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
                 }
-                
+            //passes daylife specific parameters and queries for the image provided in the original post
             } else if (self.service.serviceName == @"news"){
                 if (daylifeResponse != nil){
                     NSURL *imageURL = [NSURL URLWithString:[[[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"image"] valueForKey:@"url"]objectAtIndex:indexPath.row]];
@@ -224,19 +222,8 @@
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
                 }
             } 
-}
+        }
          
-       }
- 
-- (NSString*)remove:(NSString*)textToRemove fromString:(NSString*)input
-{
-    return [input stringByReplacingOccurrencesOfString:textToRemove
-                                            withString:@""];
-}
-
-
-#pragma mark - Table view delegate
-
-
+    }
 
 @end

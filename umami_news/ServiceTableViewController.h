@@ -11,8 +11,6 @@
 
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong) IBOutlet UIActivityIndicatorView *spinner;
-- (BOOL)connected ;
-
+@property (strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

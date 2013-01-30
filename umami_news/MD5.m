@@ -11,6 +11,9 @@
 
 @implementation NSString (MD5)
 
+//MD5 Hasher
+// source http://stackoverflow.com/questions/2018550/how-do-i-create-an-md5-hash-of-a-string-in-cocoa
+
 - (NSString *)MD5String {
     const char *cstr = [self UTF8String];
     unsigned char result[16];
