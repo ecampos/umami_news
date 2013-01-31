@@ -238,8 +238,7 @@
                     }
                 }
                 }else {
-                    NSString *fbURL = [NSString stringWithFormat:@"%@%@%@", @"https://graph.facebook.com/", user, @"/picture?type=large" ];
-                    NSURL *imageURL = [NSURL URLWithString:fbURL];
+                    NSURL *imageURL = [NSURL URLWithString:@"https://graph.facebook.com/facebook/picture?type=normal"];
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
                 }
