@@ -286,11 +286,6 @@
 		32475C7216A1923E004543D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../FacebookSDK\"",
-					"\"$(SRCROOT)\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umami_news/umami_news-Prefix.pch";
 				INFOPLIST_FILE = "umami_news/umami_news-Info.plist";
@@ -303,11 +298,6 @@
 		32475C7316A1923E004543D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../FacebookSDK\"",
-					"\"$(SRCROOT)\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "umami_news/umami_news-Prefix.pch";
 				INFOPLIST_FILE = "umami_news/umami_news-Info.plist";

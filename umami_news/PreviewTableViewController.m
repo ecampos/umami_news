@@ -41,19 +41,19 @@
 //number of cells for each service
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.service.serviceName == @"twitter"){
+    if ([self.service.serviceName isEqual: @"twitter"]){
         if (twitterResponse != nil && twitterNames.count != 0){
                 return twitterNames.count;
         } else {
             return 1;
         }
-    } else if (self.service.serviceName == @"facebook"){
+    } else if ([self.service.serviceName isEqual: @"facebook"]){
         if (facebookResponse != nil && facebookNames.count != 0){
             return facebookNames.count;
         } else {
             return 1;
         }
-    } else if (self.service.serviceName == @"news"){
+    } else if ([self.service.serviceName isEqual: @"news"]){
         if (daylifeResponse != nil && daylifeNames.count != 0){
                 return daylifeNames.count;
         } else {
@@ -79,7 +79,7 @@
     @try {
         
         //case if Twitter
-        if (self.service.serviceName == @"twitter") {
+        if ([self.service.serviceName isEqual: @"twitter"]) {
             if (twitterResponse!= nil){
                 cell.textLabel.text = [[twitterNames valueForKey:@"from_user_name"] objectAtIndex:indexPath.row];
                 cell.detailTextLabel.text = [[twitterContent valueForKey:@"text"] objectAtIndex:indexPath.row];
@@ -89,7 +89,7 @@
             }
             
             //case if Daylife
-        } else if (self.service.serviceName == @"news") {
+        } else if ([self.service.serviceName isEqual: @"news"]) {
             if (daylifeResponse!= nil){
                 cell.textLabel.text = [[daylifeNames valueForKey:@"name"] objectAtIndex:indexPath.row];
                 cell.detailTextLabel.text = [[daylifeContent valueForKey:@"headline"] objectAtIndex:indexPath.row];
@@ -99,7 +99,7 @@
             }
             
             //case if Facebook
-        } else if (self.service.serviceName == @"facebook") {
+        } else if ([self.service.serviceName isEqual: @"facebook"]) {
             if (facebookResponse!= nil){
                 NSString *messageValue = [[facebookContent  valueForKey:@"message"] objectAtIndex:indexPath.row];
                 NSString *linkValue = [[facebookContent  valueForKey:@"link"] objectAtIndex:indexPath.row];
@@ -127,7 +127,7 @@
     }
     
     @catch (NSException *exception) {
-        if (self.service.serviceName == @"facebook") {
+        if ([self.service.serviceName isEqual: @"facebook"]) {
             if (facebookNames.count == 0){
             cell.textLabel.text = @"so many people on Facebook";
                 cell.detailTextLabel.text = @"yet nobody seems to think the same as you";
@@ -136,7 +136,7 @@
             cell.detailTextLabel.text = @"sorry for that I hope we're still friends";
         }}
         
-        if (self.service.serviceName == @"twitter") {
+        if ([self.service.serviceName isEqual: @"twitter"]) {
             if (twitterNames.count == 0){
             cell.textLabel.text = @"look for something intersting";
             cell.detailTextLabel.text = @"None on Twitter seems to care about this";
@@ -145,7 +145,7 @@
             cell.detailTextLabel.text = @"sorry for that I hope we're still friends";
         }}
         
-        if (self.service.serviceName == @"news") {
+        if ([self.service.serviceName isEqual: @"news"]) {
             if (daylifeNames.count ==0
                 ) {
             cell.textLabel.text = @"Your query is not newsworthy";
@@ -158,8 +158,6 @@
     @finally {
         return cell;
     }
-
-    
 }
 
 
@@ -175,47 +173,94 @@
             detailViewController.detailItem = indexPath;
             detailViewController.title = cell.textLabel.text;
             
-            if (self.service.serviceName == @"news" && daylifeNames != nil){
-                detailViewController.message = [[daylifeContent valueForKey:@"excerpt"] objectAtIndex:indexPath.row];
+            // daylife uses the headline for the preview and an excerpt for text
+            
+            if ([self.service.serviceName isEqual: @"news"] && daylifeNames != nil){
+                @try {
+                    detailViewController.message = [[daylifeContent valueForKey:@"excerpt"] objectAtIndex:indexPath.row];
+                }
+                @catch (NSException *exception) {
+                    detailViewController.message = cell.detailTextLabel.text;
+                }
             } else {
             detailViewController.message = cell.detailTextLabel.text;
             }
+            
             //passes twitter specific parameters and queries for the user image based on user id in the original post
-            if (self.service.serviceName == @"twitter"){
+            if ([self.service.serviceName isEqual: @"twitter"]){
                 if (twitterResponse != nil){
-                    NSString *user =  [[[twitterResponse objectForKey:@"results"] valueForKey:@"from_user"] objectAtIndex:indexPath.row];
-                    //search for picture and display
-                    NSURL *imageURL =  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", @"http://api.twitter.com/1/users/profile_image?screen_name=",user, @"&size=original"]];
-                    NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
-                    detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                    NSString *user;
+                    @try {
+                        user =  [[[twitterResponse objectForKey:@"results"] valueForKey:@"from_user"] objectAtIndex:indexPath.row];
+                    }
+                    @catch (NSException *exception) {
+                        user  = @"error";                    }
+                    @finally {
+                        
+                        if ([user isEqualToString:@"error"]) {
+                            NSURL *imageURL = [NSURL URLWithString:@"https://twitter.com/images/resources/twitter-bird-light-bgs.png"];
+                            NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
+                            detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                        }else {
+                            NSURL *imageURL =  [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", @"http://api.twitter.com/1/users/profile_image?screen_name=",user, @"&size=original"]];
+                            NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
+                            detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                        }
+                    }
                 } else {
-                    NSURL *imageURL = [NSURL URLWithString:@"https://twitter.com/images/resources/twitter-bird-light-bgs.png"];
-                    NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
-                    detailViewController.imageCarrier = [UIImage imageWithData:imageData];
-             
+                        NSURL *imageURL = [NSURL URLWithString:@"https://twitter.com/images/resources/twitter-bird-light-bgs.png"];
+                        NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
+                        detailViewController.imageCarrier = [UIImage imageWithData:imageData];
                 }
+          
              //passes facebook specific parameters and queries for the user image based on user id in the original post
-            } else if (self.service.serviceName == @"facebook"){
+            } else if ([self.service.serviceName isEqual: @"facebook"]){
+                NSString *user;
                 if (facebookResponse != nil){
-                    NSString *user = [[[[facebookResponse objectForKey:@"data"] valueForKey:@"from"] valueForKey:@"id"] objectAtIndex:indexPath.row];
+                    
+                    @try {
+                         user = [[[[facebookResponse objectForKey:@"data"] valueForKey:@"from"] valueForKey:@"id"] objectAtIndex:indexPath.row];
+                    }
+                    @catch (NSException *exception) {
+                        user  = @"error";  
+                    }
+                    @finally {
+                        if ([user isEqualToString:@"error"]) {
+                            NSURL *imageURL = [NSURL URLWithString:@"https://graph.facebook.com/facebook/picture?type=normal"];
+                            NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
+                            detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                    } else {
+                   
+                        NSString *fbURL = [NSString stringWithFormat:@"%@%@%@", @"https://graph.facebook.com/", user, @"/picture?type=large" ];
+                        NSURL *imageURL = [NSURL URLWithString:fbURL];
+                        NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
+                        detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                    }
+                }
+                }else {
                     NSString *fbURL = [NSString stringWithFormat:@"%@%@%@", @"https://graph.facebook.com/", user, @"/picture?type=large" ];
                     NSURL *imageURL = [NSURL URLWithString:fbURL];
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
                     detailViewController.imageCarrier = [UIImage imageWithData:imageData];
-                    
-                } else {
-                    NSURL *imageURL = [NSURL URLWithString:@"https://graph.facebook.com/facebook/picture?type=normal"];
-                    NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
-                    detailViewController.imageCarrier = [UIImage imageWithData:imageData];
                 }
+                
             //passes daylife specific parameters and queries for the image provided in the original post
-            } else if (self.service.serviceName == @"news"){
+            } else if ([self.service.serviceName isEqual: @"news"]){
+                NSURL *imageURL;
                 if (daylifeResponse != nil){
-                    NSURL *imageURL = [NSURL URLWithString:[[[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"image"] valueForKey:@"url"]objectAtIndex:indexPath.row]];
-                    NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
-                    detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                    @try {
+                        imageURL = [NSURL URLWithString:[[[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"]valueForKey:@"image"] valueForKey:@"url"]objectAtIndex:indexPath.row]];
+                        detailViewController.sourceLink = [[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"] valueForKey:@"url"] objectAtIndex:indexPath.row];
+                    }
+                    @catch (NSException *exception) {
+                        imageURL = [NSURL URLWithString:@"https://twimg0-a.akamaihd.net/profile_images/68501526/daylife_sun.png"];
+                    }
+                    @finally {
+                        NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];
+                        detailViewController.imageCarrier = [UIImage imageWithData:imageData];
+                    }
                     
-                    detailViewController.sourceLink = [[[[[daylifeResponse objectForKey:@"response"]objectForKey:@"payload"] objectForKey:@"article"] valueForKey:@"url"] objectAtIndex:indexPath.row];
+
                 } else {
                     NSURL *imageURL = [NSURL URLWithString:@"https://twimg0-a.akamaihd.net/profile_images/68501526/daylife_sun.png"];
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingUncached error:&error];

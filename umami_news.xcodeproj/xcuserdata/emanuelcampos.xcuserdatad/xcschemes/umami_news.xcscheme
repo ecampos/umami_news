@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "32475C4C16A1923E004543D6"
-               BuildableName = "umami_news.app"
-               BlueprintName = "umami_news"
+               BuildableName = "Umami News.app"
+               BlueprintName = "Umami News"
                ReferencedContainer = "container:umami_news.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32475C4C16A1923E004543D6"
-            BuildableName = "umami_news.app"
-            BlueprintName = "umami_news"
+            BuildableName = "Umami News.app"
+            BlueprintName = "Umami News"
             ReferencedContainer = "container:umami_news.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,8 +52,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32475C4C16A1923E004543D6"
-            BuildableName = "umami_news.app"
-            BlueprintName = "umami_news"
+            BuildableName = "Umami News.app"
+            BlueprintName = "Umami News"
             ReferencedContainer = "container:umami_news.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,8 +70,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "32475C4C16A1923E004543D6"
-            BuildableName = "umami_news.app"
-            BlueprintName = "umami_news"
+            BuildableName = "Umami News.app"
+            BlueprintName = "Umami News"
             ReferencedContainer = "container:umami_news.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
